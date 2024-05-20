@@ -11,3 +11,7 @@
  #### Frontend ####
   step 1 : npm install
   step 2 :npm start
+
+  #### INFO ####
+  name : BEN AMARA MOhamed amine
+  time to finish : 2h30
