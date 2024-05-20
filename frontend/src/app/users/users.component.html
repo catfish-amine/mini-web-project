@@ -1,0 +1,50 @@
+
+<ng-container class="container">
+
+    <h2> Users list </h2>
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z6">
+    
+    
+        @for (col of displayedColumns; track col) {
+            <ng-container matColumnDef="{{col}}">
+                <th mat-header-cell *matHeaderCellDef> {{col}} </th>
+                <td mat-cell *matCellDef="let element" class="pointer" (click)="selectedUser = element">
+                @if(col != 'Profile picture'){
+                    {{element[col] ?? ''}} 
+                } @else {
+                    <img src="{{element[col] ?? ''}}"/>
+                }
+                </td>
+            </ng-container>
+        }
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    
+    </table>
+    <mat-paginator [pageSizeOptions]="[5]" 
+    [length]="500"
+    (page)="pageEvent = $event; onPaginateChange($event)"
+    [pageSize]="pageSize"
+    showFirstLastButtons></mat-paginator>
+      
+</ng-container>
+
+
+@if(selectedUser != null){
+    <ng-container>
+        <mat-card class="card">
+            <mat-card-header>
+              <mat-card-title-group>
+                <mat-card-title>{{selectedUser['First name'] + ' '+ selectedUser['Last name']}}</mat-card-title>
+                <mat-card-subtitle>{{selectedUser['City']}} , {{selectedUser['Country']}}</mat-card-subtitle>
+                <mat-card-subtitle>{{selectedUser['Email']}}</mat-card-subtitle>
+                <mat-card-subtitle>Phone : {{selectedUser['Phone']}}</mat-card-subtitle>
+                <mat-card-subtitle>Cell : {{selectedUser['Cell']}}</mat-card-subtitle>
+                <img mat-card-md-image src="{{selectedUser['picture']}}">
+              </mat-card-title-group>
+            </mat-card-header>
+          </mat-card>
+    </ng-container>
+}
+
+  
